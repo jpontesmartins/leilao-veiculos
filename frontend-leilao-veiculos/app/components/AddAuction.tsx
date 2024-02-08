@@ -20,6 +20,7 @@ export default function AddAuction() {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("leilao.token")}`
                 },
                 body: JSON.stringify({ brand, model, year, startingBid, initialDate, endDate }),
             });
