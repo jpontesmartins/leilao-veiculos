@@ -101,7 +101,6 @@ export default function AuctionsList() {
              
                 <input
                     onChange={(e) => prepareBid(Number(e.target.value), auction)}
-                    value={newAmount}
                     className="border border-slate-500 px-8 py-2"
                     type="text"
                     placeholder="Valor do lance"
