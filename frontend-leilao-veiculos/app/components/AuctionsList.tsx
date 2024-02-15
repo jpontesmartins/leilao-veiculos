@@ -11,6 +11,7 @@ export default function AuctionsList() {
     const [newAmount, setNewAmount] = useState(0);
 
     const [showModal, setShowModal] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const router = useRouter();
 
@@ -49,8 +50,10 @@ export default function AuctionsList() {
 
       const isValidAmount = newAmount > auction.startingBid && newAmount > auction.actualBid;
       if (!isValidAmount) {
-        console.log("Não é possivel!");
+        console.log("O lance dado deve ser maior que o atual!");
+        setErrorMsg("O lance dado deve ser maior que o atual!");
         toggleModal();
+
         return;
       }
   
@@ -107,7 +110,7 @@ export default function AuctionsList() {
             </div>
           ))}
 
-          {showModal ? <BasicModal toggleModal={toggleModal} /> :<></> }
+          {showModal ? <BasicModal toggleModal={toggleModal} message={errorMsg} /> :<></> }
         </>
       );
 }
