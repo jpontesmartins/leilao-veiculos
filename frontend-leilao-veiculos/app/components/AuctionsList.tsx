@@ -17,27 +17,25 @@ export default function AuctionsList() {
     const toggleModal = () => {
       setShowModal(!showModal);
     }
+    
+    const getAuctions: any = async () => {
+      try {
+        const res = await fetch("http://localhost:9090/auctions", {
+          cache: "no-store",
+        });
+    
+        if (!res.ok) {
+          throw new Error("Falha ao carregar veículos");
+        }
+
+        setAuctions(await res.json());
+      } catch (error) {
+        console.log("Erro ao carregar veículos: ", error);
+      }
+    };
 
     useEffect(()=> {
-
-      const getAuctions: any = async () => {
-        try {
-          const res = await fetch("http://localhost:9090/auctions", {
-            cache: "no-store",
-          });
-      
-          if (!res.ok) {
-            throw new Error("Falha ao carregar veículos");
-          }
-
-          setAuctions(await res.json());
-        } catch (error) {
-          console.log("Erro ao carregar veículos: ", error);
-        }
-      };
-      
       setAuctions(getAuctions());
-
     },[])
 
     const prepareBid = async (newBidAmount: any, auction: any) => {
@@ -64,6 +62,7 @@ export default function AuctionsList() {
           },
           body: JSON.stringify({ amount: newAmount, userId: userId, auctionId: auctionId }),
         });
+        setAuctions(getAuctions());
   
         if (!res.ok) {
           console.log(res);
@@ -71,8 +70,6 @@ export default function AuctionsList() {
           throw new Error("Erro ao dar o lance");
         }
   
-        // router.refresh();
-        // router.push("/");
       } catch (error) {
         console.log(error);
       }
@@ -92,8 +89,8 @@ export default function AuctionsList() {
               </div>
 
               <div>
-                <div>mín. R$ {auction.actualBid}</div>
-                <h2 className="font-bold text-2xl">atual: R$ {auction.startingBid}</h2>
+                <div>mín. R$ {auction.startingBid}</div>
+                <h2 className="font-bold text-2xl">atual: R$ {auction.actualBid}</h2>
               </div>
               
               
