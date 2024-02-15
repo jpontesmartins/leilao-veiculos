@@ -20,13 +20,25 @@ export class BidsService {
       throw new Error("Errrrro");
     } 
 
-    return await this.prisma.bid.create({
+    const createdBid = await this.prisma.bid.create({
       data: {
         amount: createBidDto.amount,
         auctionId: createBidDto.auctionId,
         userId: createBidDto.userId
       }
+    });
+
+    auction.actualBid = createBidDto.amount;
+    await this.prisma.auction.update({
+      data: {
+        actualBid: auction.actualBid,
+      },
+      where: {
+        id: auction.id
+      }
     })
+
+    return createdBid;
   }
 
   findAll() {
