@@ -15,11 +15,13 @@ export class UsersService {
     return `This action returns all users`;
   }
 
-  findOne(email: string) {
-    return this.prisma.user.findUnique(
+  async findOne(id: string) {
+    console.log("id");
+    console.log(id);
+    return await this.prisma.user.findUnique(
       {
         where: {
-          email: email, 
+          id: id
         }
       }
     )

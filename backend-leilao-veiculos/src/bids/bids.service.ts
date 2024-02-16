@@ -10,6 +10,8 @@ export class BidsService {
   async create(createBidDto: CreateBidDto) {
 
     //validar o amount aqui tbm
+    console.log("createBidDto");
+    console.log(createBidDto);
     const auction = await this.prisma.auction.findUnique({
       where: {
         id: createBidDto.auctionId
@@ -20,13 +22,25 @@ export class BidsService {
       throw new Error("Errrrro");
     } 
 
-    return await this.prisma.bid.create({
+    const createdBid = await this.prisma.bid.create({
       data: {
         amount: createBidDto.amount,
         auctionId: createBidDto.auctionId,
         userId: createBidDto.userId
       }
+    });
+
+    auction.actualBid = createBidDto.amount;
+    await this.prisma.auction.update({
+      data: {
+        actualBid: auction.actualBid,
+      },
+      where: {
+        id: auction.id
+      }
     })
+
+    return createdBid;
   }
 
   findAll() {

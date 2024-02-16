@@ -19,4 +19,7 @@ export class CreateAuctionDto {
     @ApiProperty()
     endDate: string;
 
+    @ApiProperty()
+    creatorId: string;
+
 }
