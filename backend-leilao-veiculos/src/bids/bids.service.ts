@@ -10,6 +10,8 @@ export class BidsService {
   async create(createBidDto: CreateBidDto) {
 
     //validar o amount aqui tbm
+    console.log("createBidDto");
+    console.log(createBidDto);
     const auction = await this.prisma.auction.findUnique({
       where: {
         id: createBidDto.auctionId
