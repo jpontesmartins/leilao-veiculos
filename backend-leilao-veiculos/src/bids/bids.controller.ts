@@ -18,7 +18,8 @@ export class BidsController {
     if (!req.user.id) {
       throw new ForbiddenException();
     }
-
+    
+    createBidDto.userId = req.user.id;
     return this.bidsService.create(createBidDto);
   }
 
