@@ -8,4 +8,4 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: 123456
       INIT_WAIT_SEC: 3
     ports:
-      - 27014:27017
+      - 27013:27017

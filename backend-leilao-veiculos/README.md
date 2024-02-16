@@ -16,7 +16,7 @@ $ npm install
 
 Criar arquivo .env com os dados do banco:
 ```bash
-DATABASE_URL="mongodb://admin:123456@localhost:27014/leilao-veiculos?authSource=admin&directConnection=true&retryWrites=true&w=majority"
+DATABASE_URL="mongodb://admin:123456@localhost:27013/leilao-veiculos?authSource=admin&directConnection=true&retryWrites=true&w=majority"
 ```
 
 ```bash

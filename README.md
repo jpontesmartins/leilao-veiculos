@@ -3,6 +3,13 @@ leilao-veiculos
 
 ## Passo a passo
 
+Usuário para teste
+```
+fulano@email.com
+abcd1234
+```
+
+
 ### Backend
 
 http://localhost:9090/api  
