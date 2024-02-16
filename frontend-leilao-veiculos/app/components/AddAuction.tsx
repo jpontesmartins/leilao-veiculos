@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuctionsContext } from "./Context";
 
 export default function AddAuction() {
     const [brand, setBrand] = useState("");
@@ -11,7 +12,28 @@ export default function AddAuction() {
     const [initialDate, setInitialDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
+    const { setAuctions, setSuccessMsg } = useAuctionsContext();
+
+
     const router = useRouter();
+
+    const getAuctions: any = async () => {
+        try {
+            const res = await fetch("http://localhost:9090/auctions", {
+                cache: "no-store",
+            });
+
+            if (!res.ok) {
+                throw new Error("Falha ao carregar veículos");
+            }
+
+            setAuctions(await res.json());
+            setSuccessMsg("Registro adicionado!");
+
+        } catch (error) {
+            console.log("Erro ao carregar veículos: ", error);
+        }
+    };
 
     const handleClick = async () => {
 
@@ -24,12 +46,13 @@ export default function AddAuction() {
                 },
                 body: JSON.stringify({ brand, model, year, startingBid, initialDate, endDate }),
             });
+            await getAuctions();
 
             if (!res.ok) {
                 throw new Error("Erro ao cadastrar um veículo para leilão");
             }
 
-            router.refresh();
+            router.push("/leilao")
         } catch (error) {
             console.log(error);
         }

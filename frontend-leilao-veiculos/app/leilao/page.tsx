@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import AddAuction from "../components/AddAuction";
 import AuctionsList from "../components/AuctionsList";
 import { useRouter } from "next/navigation";
+import { AuctionsContext, AuctionsContextProvider } from "../components/Context";
 
 export default function Leilao() {
-    
+
     const router = useRouter();
 
     useEffect(() => {
@@ -19,8 +20,10 @@ export default function Leilao() {
 
     return (
         <>
-            <AuctionsList />
-            <AddAuction />
+            <AuctionsContextProvider>
+                <AuctionsList />
+                <AddAuction />
+            </AuctionsContextProvider>
         </>
     );
 }
