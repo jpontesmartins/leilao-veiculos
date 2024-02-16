@@ -3,12 +3,14 @@ leilao-veiculos
 
 ## Passo a passo
 
+
+
 Usuário para teste
 ```
 fulano@email.com
 abcd1234
 ```
-
+Porta mongoDB: `27013`
 
 ### Backend
 
@@ -22,7 +24,7 @@ $ npm install
 2. Criação da base MongoDB (usando docker-compose) e seed da base
 - Criar arquivo .env com os dados do banco:
 ```bash
-DATABASE_URL="mongodb://admin:123456@localhost:27014/leilao-veiculos?authSource=admin&directConnection=true&retryWrites=true&w=majority"
+DATABASE_URL="mongodb://admin:123456@localhost:27013/leilao-veiculos?authSource=admin&directConnection=true&retryWrites=true&w=majority"
 ```
 
 ```bash
