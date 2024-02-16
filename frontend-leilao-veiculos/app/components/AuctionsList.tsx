@@ -12,6 +12,7 @@ export default function AuctionsList() {
 
     const [showModal, setShowModal] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
+    const [leilaoToken, setLeilaoToken] = useState("");
 
     const router = useRouter();
 
@@ -36,17 +37,20 @@ export default function AuctionsList() {
     };
 
     useEffect(()=> {
+      const leilaoToken = localStorage.getItem("leilao.token");
+      setLeilaoToken(leilaoToken || "");
       setAuctions(getAuctions());
     },[])
 
     const prepareBid = async (newBidAmount: any, auction: any) => {
       setNewAmount(newBidAmount);
       setAuctionId(auction.id);
-      setUserId("65c4be355a38c87234663719"); //da sessao, o usuario logado (beltrano)
+      // setUserId("65c4be355a38c87234663719"); //da sessao, o usuario logado (beltrano)
     }
     
     const handleClick = async (auction: any) => {
       console.log(auction);
+      console.log(leilaoToken);
 
       const isValidAmount = newAmount > auction.startingBid && newAmount > auction.actualBid;
       if (!isValidAmount) {
@@ -58,12 +62,14 @@ export default function AuctionsList() {
       }
   
       try {
+
         const res = await fetch(`http://localhost:9090/bids`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
+            "Authorization": `Bearer ${leilaoToken}`
           },
-          body: JSON.stringify({ amount: newAmount, userId: userId, auctionId: auctionId }),
+          body: JSON.stringify({ amount: newAmount, auctionId: auctionId }),
         });
         setAuctions(getAuctions());
   

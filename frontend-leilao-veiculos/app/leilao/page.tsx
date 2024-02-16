@@ -13,7 +13,6 @@ export default function Leilao() {
         const userSession = localStorage.getItem("leilao.token");
         if (!userSession) {
             router.push("/");
-            console.log(`userSession: ${userSession}`);
         }
 
     }, []);
@@ -21,9 +20,6 @@ export default function Leilao() {
     return (
         <>
             <AuctionsList />
-            <div className="flex justify-between items-center bg-slate-700 px-8 py-3 ">
-                <span className="text-white font-bold">Cadastre um veículo!</span>
-            </div>
             <AddAuction />
         </>
     );

@@ -36,7 +36,11 @@ export default function AddAuction() {
     };
 
     return (
+
         <div className="flex flex-col gap-3, my-2">
+            <div className="flex justify-between items-center bg-slate-700 px-8 py-3 ">
+                <span className="text-white font-bold">Cadastre um veículo!</span>
+            </div>
             <input
                 onChange={(e) => setBrand(e.target.value)}
                 value={brand}

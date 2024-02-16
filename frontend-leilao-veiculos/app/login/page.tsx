@@ -28,7 +28,9 @@ export default function Login() {
             }
 
             const retorno = await res.json();
-            const userSession = localStorage.setItem("leilao.token", retorno.accessToken);
+            
+            localStorage.setItem("leilao.token", retorno.accessToken);
+            console.log(`userSession: ${localStorage.getItem("leilao.token")}`)
 
             router.push("/leilao")
 
